@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Play Zaney Links, a Connections-style word grouping game with a huge validated puzzle pool and a custom puzzle generator."
+    />
+    <title>Zaney Links</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <script src="/config.js"></script>
+    <script defer src="/data.js"></script>
+    <script defer src="/packs.js"></script>
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar" aria-label="Zaney Links header">
+        <a class="brand" href="/" aria-label="Zaney Links home">
+          <span class="brand-mark" aria-hidden="true">Z</span>
+          <span>
+            <strong>Zaney Links</strong>
+            <small>Daily word links and custom packs</small>
+          </span>
+        </a>
+        <p class="topline">10M+ finishable boards</p>
+        <nav class="nav-tabs" aria-label="Primary">
+          <button class="nav-tab is-active" type="button" data-view-button="play">Play</button>
+          <button class="nav-tab" type="button" data-view-button="generator">Generator</button>
+        </nav>
+      </header>
+
+      <section class="view is-visible" id="play-view" aria-label="Play Zaney Links">
+        <div class="game-layout">
+          <section class="game-panel" aria-live="polite">
+            <div class="game-status">
+              <div>
+                <p class="section-label">Puzzle <span id="puzzle-id-label">00000</span></p>
+                <h1>Find the four hidden links.</h1>
+              </div>
+              <div class="mistake-meter" aria-label="Mistakes remaining">
+                <span>Mistakes</span>
+                <div id="mistake-dots" class="mistake-dots"></div>
+              </div>
+            </div>
+
+            <div id="solved-groups" class="solved-groups" aria-label="Solved categories"></div>
+            <div id="tile-grid" class="tile-grid" aria-label="Word tiles"></div>
+
+            <p id="game-message" class="game-message" role="status">
+              Select four tiles that belong together.
+            </p>
+
+            <div class="actions" aria-label="Game actions">
+              <button class="secondary-button" type="button" id="shuffle-button">Shuffle</button>
+              <button class="secondary-button" type="button" id="deselect-button">Deselect</button>
+              <button class="secondary-button" type="button" id="hint-button">Hint</button>
+              <button class="primary-button" type="button" id="submit-button" disabled>Submit</button>
+            </div>
+            <div id="completion-panel" class="completion-panel" hidden></div>
+          </section>
+
+          <aside class="side-rail" aria-label="Game options">
+            <section class="rail-block">
+              <h2>Today</h2>
+              <p id="pool-count">10,000+ finishable puzzles, checked at build time.</p>
+              <div class="stat-list" aria-label="Puzzle stats">
+                <span><strong>4</strong> groups</span>
+                <span><strong>4</strong> mistakes</span>
+                <span><strong>0</strong> accounts</span>
+              </div>
+              <button class="wide-button" type="button" id="new-game-button">New Game</button>
+              <button class="wide-button ghost" type="button" id="daily-button">Daily Puzzle</button>
+              <button class="wide-button ghost" type="button" id="challenge-button">Copy Challenge</button>
+            </section>
+            <section class="rail-block">
+              <h2>Themed Packs</h2>
+              <label class="select-label" for="pack-select">Pack</label>
+              <select id="pack-select">
+                <option value="all">Mixed library</option>
+              </select>
+              <button class="wide-button ghost" type="button" id="pack-button">Play Pack</button>
+            </section>
+            <section class="rail-block ad-block" aria-label="Advertisement">
+              <span>Ad</span>
+              <ins
+                class="adsbygoogle"
+                data-ad-client=""
+                data-ad-slot="0000000000"
+                data-ad-format="auto"
+                data-full-width-responsive="true"
+              ></ins>
+            </section>
+            <a class="privacy-link" href="/privacy.html">Privacy</a>
+          </aside>
+        </div>
+      </section>
+
+      <section class="view" id="generator-view" aria-label="Zaney Links generator">
+        <div class="generator-layout">
+          <section class="generator-panel">
+            <div class="generator-heading">
+              <p class="section-label">Generator</p>
+              <h1>Make a shareable puzzle.</h1>
+              <p>
+                Enter four categories with four answers each. Add explanations and difficulty colors so a finished
+                puzzle feels fair instead of mysterious.
+              </p>
+            </div>
+
+            <form id="generator-form" class="generator-form">
+              <div id="generator-fields" class="generator-fields"></div>
+              <div class="generator-actions">
+                <button class="secondary-button" type="button" id="sample-button">Fill Sample</button>
+                <button class="secondary-button" type="button" id="ai-prompt-button">AI Prompt</button>
+                <button class="primary-button" type="submit">Create Link</button>
+              </div>
+            </form>
+          </section>
+
+          <aside class="share-panel">
+            <h2>Share Link</h2>
+            <textarea id="share-output" readonly placeholder="Your custom puzzle link will appear here."></textarea>
+            <button class="wide-button" type="button" id="copy-button">Copy Link</button>
+            <h2>Creator Notes</h2>
+            <textarea id="creator-output" readonly placeholder="AI prompt or puzzle notes will appear here."></textarea>
+            <p id="generator-message" class="game-message" role="status"></p>
+          </aside>
+        </div>
+      </section>
+      <footer class="site-footer">
+        <span>2026 Zaney Links</span>
+        <a href="/privacy.html">Privacy Policy</a>
+        <span>Built for quick, fair puzzle breaks.</span>
+      </footer>
+    </main>
+  </body>
+</html>
