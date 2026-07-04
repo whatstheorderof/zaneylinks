@@ -1,0 +1,1 @@
+window.ZANEY_ADSENSE_CLIENT = "";

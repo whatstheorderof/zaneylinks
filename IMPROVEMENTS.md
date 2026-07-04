@@ -39,6 +39,18 @@
    - The validator now checks the 10,000+ generated puzzle pool and themed pack structure.
    - It blocks malformed themed packs, missing explanations, invalid difficulties, duplicate words, and incomplete groups.
 
+10. Harder link-count modes
+   - Added Classic 4-link, Hard 6-link, and Mega 8-link mixed-library modes.
+   - Challenge links preserve the selected link count.
+   - Larger boards compact their tiles automatically so 24-word and 32-word puzzles remain playable.
+
+11. Launch-loop implementation
+   - Added spoiler-safe result sharing after completion.
+   - Added local streak, played count, and best-score tracking.
+   - Added 4/6/8-link support to the custom puzzle generator.
+   - Added a how-to-play modal.
+   - Added SEO basics: social metadata, `robots.txt`, and `sitemap.xml`.
+
 ## High-Value Next Improvements
 
 1. Upgrade the main category bank to full authored metadata
@@ -49,9 +61,9 @@
    - Track ambiguity risks such as words with multiple meanings, overlapping category themes, or too many proper nouns.
    - Keep an internal `quality: "safe" | "spicy" | "experimental"` flag so only safe puzzles enter the daily rotation.
 
-3. Daily archive and streaks
+3. Daily archive and deeper progress
    - Save solved daily puzzles locally.
-   - Add streak count, completion time, and mistake count.
+   - Expand the current local streak and best-score tracking with completion time history and per-mode records.
    - Keep this local-only until accounts exist.
 
 4. User-submitted pack moderation
@@ -64,9 +76,9 @@
    - Run every AI output through the same validator.
    - Add a human approval step before any AI-generated puzzle enters the public pool.
 
-6. Challenge results
-   - Add share text after completion: puzzle id, mistake count, and colored difficulty result blocks.
-   - Avoid spoiling category names in the copied result.
+6. Share-card polish
+   - Add generated Open Graph images for completed daily puzzles and friend challenges.
+   - Keep category names out of copied result text so shares stay spoiler-safe.
 
 7. Accessibility polish
    - Add keyboard grid navigation with arrow keys.
@@ -81,7 +93,7 @@
 9. SEO and retention
    - Add static pages for each pack.
    - Add Open Graph images for challenge links.
-   - Add a lightweight “how to play” modal reachable from the header.
+   - Add a lightweight archive so players can revisit earlier daily puzzles.
 
 10. Analytics without creepiness
    - Track only aggregate events: puzzle started, puzzle completed, hints used, pack played.
@@ -103,3 +115,73 @@ type LinksPuzzle = {
 ```
 
 The app now supports this shape for themed packs and custom shared puzzles. The large generated library still uses the older compact bank format internally, then normalizes into this shape at runtime.
+
+## Remaining Gap Audit - July 4, 2026
+
+### Launch Blockers
+
+1. Main bank metadata quality
+   - Current state: the generated-library groups mostly use plain category names and fallback explanations.
+   - Add: authored funny names, explanations, difficulty, and optional theme tags for all 127 groups.
+   - Why it matters: the differentiator is personality, not just a mathematically valid board.
+
+2. AdSense launch details
+   - Current state: ad slot, privacy policy, and `ads.txt` placeholder exist.
+   - Add: real publisher id, real `ads.txt`, production domain, and final contact inbox.
+   - Why it matters: Google review will look for a complete site, real policy, and stable content.
+
+### Important Next Additions
+
+1. Puzzle archive
+   - Add a simple daily archive page or drawer.
+   - Show previous daily puzzles by date and mode.
+   - Keep answers hidden until opened.
+
+2. Better themed packs
+   - Expand each pack beyond one puzzle.
+   - Add pack metadata: `title`, `description`, `difficulty`, `puzzleCount`, and `slug`.
+   - Add more packs: TV, books, sports, food, internet culture, British slang.
+
+3. Safer puzzle validation
+   - Add ambiguity checks for word overlap across semantic themes.
+   - Add banned word list and length warnings.
+   - Add a report mode that prints suspicious categories instead of only pass/fail.
+
+4. Accessibility pass
+   - Add arrow-key tile navigation.
+   - Add focus management after solved groups.
+   - Add screen-reader announcements for hint use, solved rows, and completion.
+
+5. Lightweight analytics
+   - Track only aggregate, non-sensitive events: game started, mode selected, puzzle solved, hint used, pack played.
+   - Do not track custom puzzle contents unless the user explicitly submits them.
+
+### Later Bets
+
+1. Community submissions
+   - Add import/export JSON first.
+   - Later add a backend moderation queue.
+   - Never publish user submissions without validation and review.
+
+2. Real AI-assisted generation
+   - Add a serverless endpoint only after the static product is stable.
+   - Validate every AI output.
+   - Treat AI results as drafts, not automatic public puzzles.
+
+3. Multiplayer race
+   - Add only after daily/streak/share loops are working.
+   - Likely needs a backend or realtime service.
+
+4. Sponsored packs
+   - Better fit than heavy ads if the game gets traction.
+   - Could sponsor themed packs without interrupting the puzzle board.
+
+## Recommended Next Build Order
+
+1. Upgrade all category-bank entries with funny names, explanations, difficulty, and themes.
+2. Add final AdSense production values once the publisher id and production domain are known.
+3. Add puzzle archive and daily history.
+4. Add accessibility keyboard navigation and focus management.
+5. Expand themed packs into multi-puzzle collections.
+6. Add safer ambiguity validation and report mode.
+7. Add lightweight aggregate analytics.

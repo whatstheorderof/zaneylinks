@@ -4,6 +4,7 @@ import vm from "node:vm";
 const DATA_PATH = new URL("../public/data.js", import.meta.url);
 const PACKS_PATH = new URL("../public/packs.js", import.meta.url);
 const MINIMUM_PUZZLES = 10000;
+const MODE_COUNTS = [4, 6, 8];
 
 function loadData() {
   const source = fs.readFileSync(DATA_PATH, "utf8");
@@ -29,6 +30,20 @@ function combinationsCount(n, r) {
     result = (result * (n - r + index)) / index;
   }
   return Math.floor(result);
+}
+
+function pickGroups(groups, groupCount, seed) {
+  const picked = [];
+  const shuffled = groups
+    .map((group, index) => ({ group, sort: (index * 2654435761 + seed * 97) >>> 0 }))
+    .sort((a, b) => a.sort - b.sort)
+    .map((item) => item.group);
+
+  for (const group of shuffled) {
+    picked.push(group);
+    if (picked.length === groupCount) return picked;
+  }
+  return picked;
 }
 
 function validateGroups(groups) {
@@ -70,6 +85,21 @@ function validateGroups(groups) {
   if (puzzleCount < MINIMUM_PUZZLES) {
     errors.push(`Puzzle pool is ${puzzleCount.toLocaleString()}, below ${MINIMUM_PUZZLES.toLocaleString()}.`);
   }
+
+  MODE_COUNTS.forEach((groupCount) => {
+    const modeCount = combinationsCount(groups.length, groupCount);
+    if (modeCount < MINIMUM_PUZZLES) {
+      errors.push(`${groupCount}-link mode is ${modeCount.toLocaleString()}, below ${MINIMUM_PUZZLES.toLocaleString()}.`);
+    }
+    for (let seed = 1; seed <= 250; seed += 1) {
+      const picked = pickGroups(groups, groupCount, seed);
+      const words = picked.flatMap((group) => group.words.map(normalize));
+      if (picked.length !== groupCount || new Set(words).size !== groupCount * 4) {
+        errors.push(`${groupCount}-link sample seed ${seed} did not produce ${groupCount} complete unique groups.`);
+        break;
+      }
+    }
+  });
 
   return errors;
 }
@@ -128,5 +158,5 @@ if (errors.length) {
 }
 
 console.log(
-  `Puzzle validation passed: ${groups.length} groups produce ${combinationsCount(groups.length, 4).toLocaleString()} finishable puzzles, plus ${packs.length} themed packs.`
+  `Puzzle validation passed: ${groups.length} groups support 4/6/8-link modes (${combinationsCount(groups.length, 4).toLocaleString()} classic boards), plus ${packs.length} themed packs.`
 );
