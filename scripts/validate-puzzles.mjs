@@ -4,7 +4,7 @@ import vm from "node:vm";
 const DATA_PATH = new URL("../public/data.js", import.meta.url);
 const PACKS_PATH = new URL("../public/packs.js", import.meta.url);
 const MINIMUM_PUZZLES = 10000;
-const MODE_COUNTS = [4, 6, 8];
+const MODE_COUNTS = [4, 6, 8, 12, 16];
 
 function loadData() {
   const source = fs.readFileSync(DATA_PATH, "utf8");
@@ -158,5 +158,5 @@ if (errors.length) {
 }
 
 console.log(
-  `Puzzle validation passed: ${groups.length} groups support 4/6/8-link modes (${combinationsCount(groups.length, 4).toLocaleString()} classic boards), plus ${packs.length} themed packs.`
+  `Puzzle validation passed: ${groups.length} groups support 4/6/8/12/16-link modes (${combinationsCount(groups.length, 4).toLocaleString()} classic boards), plus ${packs.length} themed packs.`
 );

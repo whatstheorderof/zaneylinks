@@ -6,7 +6,9 @@
   const MODES = {
     4: { links: 4, mistakes: 4, label: "Classic" },
     6: { links: 6, mistakes: 5, label: "Hard" },
-    8: { links: 8, mistakes: 6, label: "Mega" }
+    8: { links: 8, mistakes: 6, label: "Mega" },
+    12: { links: 12, mistakes: 9, label: "Ultra" },
+    16: { links: 16, mistakes: 12, label: "Zaney" }
   };
   const STORAGE_KEY = "zaney-links-progress-v1";
   const DAILY_EPOCH = Date.UTC(2026, 0, 1);
@@ -156,7 +158,9 @@
     return {
       4: "four",
       6: "six",
-      8: "eight"
+      8: "eight",
+      12: "twelve",
+      16: "sixteen"
     }[value] || String(value);
   }
 
@@ -646,7 +650,7 @@
 
   function validateCustomGroups(groups) {
     const allWords = new Set();
-    if (![4, 6, 8].includes(groups.length)) return "Custom puzzles need 4, 6, or 8 links.";
+    if (!MODES[groups.length]) return "Custom puzzles need 4, 6, 8, 12, or 16 links.";
     for (const group of groups) {
       if (!String(group.category || group.title || "").trim()) return "Every category needs a name.";
       if (!DIFFICULTY_ORDER.includes(groupDifficulty(group))) return "Every category needs a valid difficulty.";
@@ -772,6 +776,54 @@
         difficulty: "tricky",
         words: ["Speck", "Crumb", "Pebble", "Droplet"],
         explanation: "Each word describes something small, but from a different setting."
+      },
+      {
+        category: "Weather verbs",
+        difficulty: "easy",
+        words: ["Rain", "Hail", "Snow", "Drizzle"],
+        explanation: "Each word can describe weather falling from the sky."
+      },
+      {
+        category: "Things with rings",
+        difficulty: "medium",
+        words: ["Saturn", "Tree", "Phone", "Bell"],
+        explanation: "Each can have, show, or make rings."
+      },
+      {
+        category: "Words after fire",
+        difficulty: "hard",
+        words: ["Drill", "Fly", "Place", "Wall"],
+        explanation: "Each can follow the word fire to form a familiar phrase."
+      },
+      {
+        category: "Board game bits",
+        difficulty: "easy",
+        words: ["Pawn", "Token", "Card", "Spinner"],
+        explanation: "All four are common pieces or tools in tabletop games."
+      },
+      {
+        category: "Things that charge",
+        difficulty: "medium",
+        words: ["Battery", "Knight", "Rhino", "Lawyer"],
+        explanation: "Each can charge, though the meaning changes by context."
+      },
+      {
+        category: "Silent-letter starters",
+        difficulty: "tricky",
+        words: ["Knife", "Gnome", "Wrist", "Psychic"],
+        explanation: "Each starts with a written letter that is usually not pronounced."
+      },
+      {
+        category: "Kitchen cuts",
+        difficulty: "hard",
+        words: ["Dice", "Julienne", "Mince", "Chop"],
+        explanation: "These are ways to cut ingredients while cooking."
+      },
+      {
+        category: "Browser buttons",
+        difficulty: "easy",
+        words: ["Back", "Refresh", "Home", "Bookmark"],
+        explanation: "All four are common browser navigation controls."
       }
     ];
     samples.slice(0, generatorGroupCount()).forEach((group, index) => {
@@ -868,7 +920,7 @@
 
   function init() {
     const pool = combinationsCount(GROUPS.length, 4);
-    els.poolCount.textContent = `${pool.toLocaleString()}+ classic boards, with harder 6-link and 8-link modes.`;
+    els.poolCount.textContent = `${pool.toLocaleString()}+ classic boards, with harder 6/8/12/16-link modes.`;
     buildGeneratorFields();
     populatePacks();
     const linkedPuzzle = puzzleFromHash();

@@ -40,14 +40,14 @@
    - It blocks malformed themed packs, missing explanations, invalid difficulties, duplicate words, and incomplete groups.
 
 10. Harder link-count modes
-   - Added Classic 4-link, Hard 6-link, and Mega 8-link mixed-library modes.
+   - Added Classic 4-link, Hard 6-link, Mega 8-link, Ultra 12-link, and Zaney 16-link mixed-library modes.
    - Challenge links preserve the selected link count.
-   - Larger boards compact their tiles automatically so 24-word and 32-word puzzles remain playable.
+   - Larger boards compact their tiles automatically so 24-word, 32-word, 48-word, and 64-word puzzles remain playable.
 
 11. Launch-loop implementation
    - Added spoiler-safe result sharing after completion.
    - Added local streak, played count, and best-score tracking.
-   - Added 4/6/8-link support to the custom puzzle generator.
+   - Added 4/6/8/12/16-link support to the custom puzzle generator.
    - Added a how-to-play modal.
    - Added SEO basics: social metadata, `robots.txt`, and `sitemap.xml`.
 

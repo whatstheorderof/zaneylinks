@@ -377,6 +377,18 @@ h2 {
   font-size: clamp(0.68rem, 1.25vw, 0.96rem);
 }
 
+.tile-grid[data-links="12"],
+.tile-grid[data-links="16"] {
+  gap: clamp(6px, 1vw, 10px);
+}
+
+.tile-grid[data-links="12"] .tile,
+.tile-grid[data-links="16"] .tile {
+  min-height: clamp(42px, 4.5vw, 62px);
+  font-size: clamp(0.58rem, 1vw, 0.82rem);
+  padding: 6px;
+}
+
 .tile:hover,
 .secondary-button:hover,
 .primary-button:hover,
@@ -872,6 +884,19 @@ button:focus-visible {
   .tile-grid[data-links="8"] .tile {
     min-height: 48px;
     font-size: clamp(0.38rem, 1.65vw, 0.6rem);
+  }
+
+  .tile-grid[data-links="12"],
+  .tile-grid[data-links="16"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 5px;
+  }
+
+  .tile-grid[data-links="12"] .tile,
+  .tile-grid[data-links="16"] .tile {
+    min-height: 44px;
+    font-size: 0.66rem;
+    padding: 5px;
   }
 
   .word-inputs {

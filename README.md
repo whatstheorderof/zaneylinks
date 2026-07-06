@@ -4,13 +4,13 @@ Zaney Links is a browser-based Connections-style word grouping game. It ships as
 
 ## What is included
 
-- A playable grouping game with Classic 4-link, Hard 6-link, and Mega 8-link modes.
+- A playable grouping game with Classic 4-link, Hard 6-link, Mega 8-link, Ultra 12-link, and Zaney 16-link modes.
 - Shuffle, mistakes, solved rows, custom puzzle links, and keyboard-friendly controls.
 - A hint system, “almost there” feedback, completion explanations, and shareable friend challenges.
 - Spoiler-safe result sharing, local streak/progress tracking, and native share fallback.
-- A generator page for building and sharing 4/6/8-link custom puzzles with difficulty and explanations.
+- A generator page for building and sharing 4/6/8/12/16-link custom puzzles with difficulty and explanations.
 - Starter themed packs for movies, gaming, animals, and music.
-- A curated category bank that produces more than 10,000 finishable puzzles by construction across 4/6/8-link mixed-library modes.
+- A curated category bank that produces more than 10,000 finishable puzzles by construction across 4/6/8/12/16-link mixed-library modes.
 - A build-time puzzle validator that blocks duplicate words, malformed groups, malformed packs, and too-small puzzle pools.
 - AdSense-ready ad slots that only load after `window.ZANEY_ADSENSE_CLIENT` is configured.
 - A full privacy policy page and `ads.txt` placeholder for AdSense readiness.
@@ -40,8 +40,8 @@ The app does not store 10,000 handwritten boards. Instead, it stores a curated b
 
 - every category has exactly four unique words,
 - no generated sample board contains duplicate words,
-- the possible valid puzzle count is at least 10,000 for Classic, Hard, and Mega mixed-library modes,
-- sampled 4/6/8-link seeds can produce complete boards with unique words,
+- the possible valid puzzle count is at least 10,000 for Classic, Hard, Mega, Ultra, and Zaney mixed-library modes,
+- sampled 4/6/8/12/16-link seeds can produce complete boards with unique words,
 - every themed pack has exactly four valid groups with explanations and difficulty labels,
 - the daily puzzle and deterministic puzzle id system can always map to a finishable board.
 
